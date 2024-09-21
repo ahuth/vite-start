@@ -1,11 +1,8 @@
-import {FlatCompat} from '@eslint/eslintrc';
 import js from '@eslint/js';
 import ts from 'typescript-eslint';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import react from 'eslint-plugin-react';
 import globals from 'globals';
-
-const compat = new FlatCompat();
 
 /** @type {import('@types/eslint').Linter.FlatConfig} */
 export default [
@@ -33,6 +30,5 @@ export default [
       },
     },
   },
-  ...compat.extends('plugin:react-hooks/recommended'),
   prettierRecommended,
 ];
