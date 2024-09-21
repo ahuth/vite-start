@@ -1,7 +1,9 @@
+import {FlatCompat} from '@eslint/eslintrc';
 import js from '@eslint/js';
 import ts from 'typescript-eslint';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
-import {FlatCompat} from '@eslint/eslintrc';
+import react from 'eslint-plugin-react';
+import globals from 'globals';
 
 const compat = new FlatCompat();
 
@@ -16,6 +18,21 @@ export default [
   },
   js.configs.recommended,
   ...ts.configs.recommended,
+  {
+    files: ['src/**/*.{jsx,tsx}'],
+    ...react.configs.flat.recommended,
+    ...react.configs.flat['jsx-runtime'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+  },
   ...compat.extends('plugin:react-hooks/recommended'),
   prettierRecommended,
 ];
